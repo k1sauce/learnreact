@@ -27,19 +27,23 @@ const BurgerBuilder = () => {
             purchasable: false,
             purchasing: false
         }
-    )
+    );
 
     const purchaseHandler = () => {
        let xBurgerState = { ...burgerState }
        xBurgerState.purchasing = true
        setBurgerState({ ...xBurgerState })
-    }
+    };
 
     const purchaseCancelHandler = () => {
     let xBurgerState = { ...burgerState }
     xBurgerState.purchasing = false
        setBurgerState({ ...xBurgerState })
-    }
+    };
+
+    const purchaseContinueHandler = () => {
+        alert('You continue!');
+    };
 
     const updatePurchaseState = (ingredients) => {
         
@@ -103,7 +107,11 @@ const BurgerBuilder = () => {
     return (
         <Aux>
             <Modal show={burgerState.purchasing} modalClosed={purchaseCancelHandler}>
-                <OrderSummary ingredients={burgerState.ingredients}/>
+                <OrderSummary 
+                    ingredients={burgerState.ingredients}
+                    purchaseCancelled={purchaseCancelHandler}
+                    purchaseContinued={purchaseContinueHandler}
+                    price={burgerState.totalPrice.toFixed(2)}/>
             </Modal>
             <Burger ingredients={burgerState.ingredients}/>
             <BuildControls
