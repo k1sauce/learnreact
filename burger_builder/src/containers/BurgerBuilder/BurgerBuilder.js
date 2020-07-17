@@ -30,9 +30,15 @@ const BurgerBuilder = () => {
     )
 
     const purchaseHandler = () => {
-       let oldBurgerState = { ...burgerState }
-       oldBurgerState.purchasing = true
-       setBurgerState({ ...oldBurgerState })
+       let xBurgerState = { ...burgerState }
+       xBurgerState.purchasing = true
+       setBurgerState({ ...xBurgerState })
+    }
+
+    const purchaseCancelHandler = () => {
+    let xBurgerState = { ...burgerState }
+    xBurgerState.purchasing = false
+       setBurgerState({ ...xBurgerState })
     }
 
     const updatePurchaseState = (ingredients) => {
@@ -96,7 +102,7 @@ const BurgerBuilder = () => {
 
     return (
         <Aux>
-            <Modal show={burgerState.purchasing}>
+            <Modal show={burgerState.purchasing} modalClosed={purchaseCancelHandler}>
                 <OrderSummary ingredients={burgerState.ingredients}/>
             </Modal>
             <Burger ingredients={burgerState.ingredients}/>
